@@ -1,0 +1,37 @@
+// Set the correct sprite paths
+$iconSpritePath: image-path('glyphicons-halflings.png');
+$iconWhiteSpritePath: image-path('glyphicons-halflings-white.png');
+
+$navbarBackground: #368ee0;
+$navbarBackgroundHighlight: #368ee0;
+$navbarText: #eee;
+$navbarLinkColor: #eee;
+
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+
+html, body { 
+  height: 100%;
+}
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -60px;
+}
+#footer {
+  height: 60px;
+}
+@media (max-width: 767px) {
+  #footer {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+.padding-top {
+  padding-top: 60px;
+}
