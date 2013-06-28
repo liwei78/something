@@ -80,4 +80,20 @@ class ProductsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # upload product csv file
+  def upload
+    @files = UploadFile.all
+  end
+
+  # uploading the file
+  def uploading
+    file = UploadFile.create(file: params[:file])
+    redirect_to results_products_path(fid: file.id)
+  end
+
+  def results
+    @file = UploadFile.find(params[:fid])
+  end
+
 end

@@ -16,4 +16,5 @@
 //= require bootstrap-dropdown
 //= require bootstrap-tooltip
 //= require bootstrap-popover
+//= require bootstrap-affix
 //= require_tree .

@@ -1,0 +1,13 @@
+.span9
+  = bootstrap_flash
+  %div
+    %ul.breadcrumb
+      %li
+        = link_to "Upload", upload_products_path
+        %span.divider /
+      %li.active Results
+
+  = debug @file
+        
+
+= render partial: "sider"

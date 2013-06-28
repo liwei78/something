@@ -4,13 +4,17 @@
     %h1=t '.title', :default => model_class.model_name.human.titleize
 
   %p
+    %strong= model_class.human_attribute_name(:sku) + ':'
+    %br
+    = @product.sku
+  %p
     %strong= model_class.human_attribute_name(:name) + ':'
     %br
     = @product.name
   %p
-    %strong= model_class.human_attribute_name(:price) + ':'
+    %strong= model_class.human_attribute_name(:sale_price) + ':'
     %br
-    = @product.price
+    = @product.sale_price
 
   .form-actions
     = link_to t('.back', :default => t("helpers.links.back")), products_path, :class => 'btn'

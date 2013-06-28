@@ -1,0 +1,15 @@
+.span9
+  = bootstrap_flash
+  %div
+    %ul.breadcrumb
+      %li
+        = link_to "Upload", upload_products_path
+        %span.divider /
+      %li
+        = link_to "Results", results_products_path
+        %span.divider /
+      %li.active Import
+
+        
+
+= render partial: "sider"

@@ -1,9 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
-  price: 9.99
+  sku: P01
+  name: Product 01
+  description: "It's a long desc about P01."
+  permalink: "p01-link"
+
+  retail_price: 100.00
+  sale_price: 89.99
+  commission_amount: 4.99
 
 two:
-  name: MyString
-  price: 9.99
+  sku: P02
+  name: Product 02
+  description: "It's a long desc about P02."
+  permalink: "p02-link"
+
+  retail_price: 50.00
+  sale_price: 39.99
+  commission_amount: 2.99

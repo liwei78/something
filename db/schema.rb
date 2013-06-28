@@ -11,20 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130626140258) do
-
-  create_table "blogs", :force => true do |t|
-    t.string   "title"
-    t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+ActiveRecord::Schema.define(:version => 20130628141905) do
 
   create_table "products", :force => true do |t|
+    t.string   "sku"
     t.string   "name"
-    t.decimal  "price"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.text     "description"
+    t.string   "permalink"
+    t.integer  "tax_category_id"
+    t.integer  "shipping_category_id"
+    t.datetime "available_on"
+    t.datetime "deleted_at"
+    t.boolean  "blocked",              :default => false
+    t.string   "meta_keywords"
+    t.string   "meta_description"
+    t.decimal  "retail_price"
+    t.decimal  "sale_price"
+    t.decimal  "commission_amount"
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
   end
 
   create_table "sessions", :force => true do |t|
@@ -36,5 +41,8 @@ ActiveRecord::Schema.define(:version => 20130626140258) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "upload_files", :force => true do |t|
+  end
 
 end
