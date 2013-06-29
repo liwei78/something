@@ -21,7 +21,7 @@ class CreateProducts < ActiveRecord::Migration
       t.decimal :commission_amount, precision: 8, scale: 2
 
       t.boolean :is_bom, default: false
-      t.integet :product_id
+      t.integer :product_id
 
       t.timestamps
     end
