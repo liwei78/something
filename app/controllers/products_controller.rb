@@ -147,4 +147,9 @@ class ProductsController < ApplicationController
 
   end
 
+  def sample
+    send_file File.join(Rails.root, 'public', 'sample.csv')
+  end
+
+
 end

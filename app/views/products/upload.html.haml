@@ -8,7 +8,7 @@
     %h2 Download this First !
     %p Hi, it's a upload template, get it first, fill it, then upload it.
     %p
-      = link_to "Get the CSV Tempalate", "/public/sample.csv", class: "btn btn-primary btn-small"
+      = link_to "Get the CSV Tempalate", sample_products_path, class: "btn btn-primary btn-small"
 
   = form_tag({action: :uploading}, multipart: true) do
     %fieldset
