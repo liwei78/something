@@ -1,3 +1,4 @@
 sku,Name,Sale Price,Commission Amount,Retail Price
-PAC01,Prod 01x,89.99,4.99,99.99
-PAC02,Prod 02y,15.99,2.00,19.00
+P501,Prod 01,89.99,4.99,99.99
+P502,Prod 02,15.99,2.00,19.00
+P503,Prod 03,9.00,2.00,12.00

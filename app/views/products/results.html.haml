@@ -13,7 +13,7 @@
       %thead
         %tr
           %th(width=10)
-            = check_box_tag :row_id, 0, true, id: 'checkall'
+            = check_box_tag :checkall, 0, true, id: 'checkall'
           %th sku
           %th name
           %th sale price
@@ -35,3 +35,4 @@
             
 
 = render partial: "sider"
+

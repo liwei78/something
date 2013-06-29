@@ -34,7 +34,7 @@
     %tbody
       - @files.each do |file|
         %tr
-          %td= file.file_name
+          %td= file.file_name + '.csv'
           %td
             = link_to "view", results_products_path(fid: file.id)
 
