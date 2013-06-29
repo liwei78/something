@@ -8,8 +8,30 @@
 #       :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
 #       :url => "/system/:attachment/:id/:style/:filename"
 
-class UploadFile < ActiveRecord::Base
-  attr_accessible :file #_file_name
-  attr_accessor :file_file_name
-  has_attached_file :file
+
+class CsvFile < ActiveRecord::Base
+  attr_accessible :file_name
+
+  def dump_products
+    products = []
+    n = 0
+    CSV.foreach(File.join(Rails.root, 'public', 'csv', "#{self.file_name}.csv")) do |row|
+      if n == 0
+        n += 1
+        next
+      else
+        products << {
+          id: n,
+          sku: row[0],
+          name: row[1],
+          sale_price: row[2],
+          commission_amount: row[3],
+          retail_price: row[4],
+        }
+        n += 1
+      end      
+    end
+    products
+  end
+
 end

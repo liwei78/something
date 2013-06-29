@@ -2,7 +2,7 @@ ViveSite::Application.routes.draw do
   resources :products do
     collection do
       get 'upload', 'results', 'import', 'done'
-      post 'uploading'
+      post 'uploading', 'importing'
     end
   end
 

@@ -11,14 +11,17 @@ class CreateProducts < ActiveRecord::Migration
 
       t.datetime :available_on
       t.datetime :deleted_at
-      t.boolean  :blocked, :default => false  # for query opt
+      t.boolean  :blocked, default: false  # for query opt
 
       t.string   :meta_keywords
       t.string   :meta_description
 
-      t.decimal :retail_price
-      t.decimal :sale_price
-      t.decimal :commission_amount
+      t.decimal :retail_price, precision: 8, scale: 2
+      t.decimal :sale_price, precision: 8, scale: 2
+      t.decimal :commission_amount, precision: 8, scale: 2
+
+      t.boolean :is_bom, default: false
+      t.integet :product_id
 
       t.timestamps
     end

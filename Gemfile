@@ -15,7 +15,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+  gem 'therubyracer', :platforms => :ruby
   # gem "less-rails"
 
   gem 'bootstrap-sass'
@@ -26,12 +26,9 @@ end
 
 gem 'jquery-rails'
 gem 'haml-rails'
-gem "paperclip", "~> 3.0"
+# gem "paperclip", "~> 3.0"
 
-group :development do
-	gem 'faker'
-end
-
+gem 'faker'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

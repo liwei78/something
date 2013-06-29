@@ -1,3 +1,5 @@
+require 'csv'
+
 class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
@@ -83,17 +85,66 @@ class ProductsController < ApplicationController
 
   # upload product csv file
   def upload
-    @files = UploadFile.all
+    @files = CsvFile.all
   end
 
   # uploading the file
+  # TODO: should put it in lib
   def uploading
-    file = UploadFile.create(file: params[:file])
+    rows = []
+    CSV.parse(params[:file].read) do |row|
+      rows << row
+    end
+    saved_file = Time.now.strftime("%Y%m%d_%H%M%S_#{rand(100)}")
+    CSV.open(File.join(Rails.root, 'public', 'csv', "#{saved_file}.csv"), 'w') do |csv|
+      rows.each do |array|
+        csv << array
+      end
+    end
+    file = CsvFile.create(file_name: saved_file)
     redirect_to results_products_path(fid: file.id)
   end
 
+  # products data come form csv
   def results
-    @file = UploadFile.find(params[:fid])
+    @file = CsvFile.find(params[:fid])
+    @products = @file.dump_products||[]
+  end
+
+  def importing
+    @file = CsvFile.find(params[:fid])
+    pids = params[:pid]
+    
+    n = 0
+    products = []
+    CSV.foreach(File.join(Rails.root, 'public', 'csv', "#{@file.file_name}.csv")) do |row|
+      if n == 0
+        n += 1
+        next
+      else
+        p pids
+        p n
+        products << row if pids.include?(n.to_s)
+        n += 1
+      end
+    end
+
+    # TODO: should be beauti.
+    products.each do |row|
+      Product.create(
+        sku: row[0],
+        name: row[1],
+        sale_price: row[2].to_f,
+        commission_amount: row[3].to_f,
+        retail_price: row[4].to_f,
+        )
+    end
+
+
+
+
+    redirect_to products_path
+
   end
 
 end

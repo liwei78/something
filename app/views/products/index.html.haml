@@ -9,13 +9,17 @@
         %th= model_class.human_attribute_name(:sku)
         %th= model_class.human_attribute_name(:name)
         %th= model_class.human_attribute_name(:sale_price)
+        %th= model_class.human_attribute_name(:commission_amount)
+        %th= model_class.human_attribute_name(:retail_price)
         %th=t '.actions', :default => t("helpers.actions")
     %tbody
       - @products.each do |product|
         %tr
           %td= product.sku
           %td= link_to product.name, product_path(product)
-          %td= product.sale_price
+          %td=m product.sale_price
+          %td=m product.commission_amount
+          %td=m product.retail_price
           %td
             = link_to t('.edit', :default => t("helpers.links.edit")), edit_product_path(product), :class => 'btn btn-mini'
             = link_to t('.destroy', :default => t("helpers.links.destroy")), product_path(product), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'

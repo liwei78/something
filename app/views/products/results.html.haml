@@ -7,7 +7,31 @@
         %span.divider /
       %li.active Results
 
-  = debug @file
-        
+  = form_tag({action: :importing}) do
+    = hidden_field_tag :fid, @file.id
+    %table.table.table-striped
+      %thead
+        %tr
+          %th(width=10)
+            = check_box_tag :row_id, 0, true, id: 'checkall'
+          %th sku
+          %th name
+          %th sale price
+          %th commission amount
+          %th retail price
+          
+      %tbody
+        - @products.each do |product|
+          %tr
+            %td= check_box_tag 'pid[]', product[:id], true, id: "pid_#{product[:id]}"
+            %td= product[:sku]
+            %td= product[:name]
+            %td= product[:sale_price]
+            %td= product[:commission_amount]
+            %td= product[:retail_price]
+
+
+    = submit_tag "Import", :class => 'btn btn-primary'
+            
 
 = render partial: "sider"
