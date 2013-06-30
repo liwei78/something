@@ -28,7 +28,7 @@ gem 'haml-rails'
 # gem "paperclip", "~> 3.0"
 
 gem 'faker'
-gem 'thin'
+# gem 'thin' # can not bundle it on server, why???
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
