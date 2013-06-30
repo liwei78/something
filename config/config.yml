@@ -1,0 +1,12 @@
+settings: &settings
+  site_name: "Vision Travel"
+  
+development:
+  <<: *settings
+  
+test:
+  <<: *settings
+  
+production:
+  <<: *settings
+

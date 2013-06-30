@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(:version => 20130629121826) do
     t.decimal  "retail_price",         :precision => 8, :scale => 2
     t.decimal  "sale_price",           :precision => 8, :scale => 2
     t.decimal  "commission_amount",    :precision => 8, :scale => 2
+    t.boolean  "is_bom",                                             :default => false
+    t.integer  "product_id"
     t.datetime "created_at",                                                            :null => false
     t.datetime "updated_at",                                                            :null => false
   end
