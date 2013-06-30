@@ -20,7 +20,7 @@
               %span.icon-bar
               %span.icon-bar
               %span.icon-bar
-            = link_to "ViveSite", root_path, class: "brand"
+            = link_to SITE_CONFIG['site_name'], root_path, class: "brand"
             .nav-collapse
               %ul.nav
                 %li= link_to "Users", '#'
@@ -48,7 +48,9 @@
       
     #footer
       .container
-        %p.muted.credit &copy; Company 2013
+        %p.muted.credit 
+          &copy; 
+          = SITE_CONFIG['site_name']
     /
       Javascripts
       \==================================================
