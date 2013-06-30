@@ -122,8 +122,6 @@ class ProductsController < ApplicationController
         n += 1
         next
       else
-        p pids
-        p n
         products << row if pids.include?(n.to_s)
         n += 1
       end
