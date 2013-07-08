@@ -58,4 +58,51 @@ class ProductsControllerTest < ActionController::TestCase
 
     assert_redirected_to products_path
   end
+
+  test "upload" do
+    get :upload
+    assert_response :success
+    assert_blank assigns(:files)
+  end
+
+  test "uploading" do
+    assert_difference('CsvFile.count') do
+      post :uploading, file: fixture_file_upload('files/sample.csv', 'text/csv')
+    end
+    file = CsvFile.first
+    assert_redirected_to results_products_path(fid: file.id)
+  end
+
+  test "results" do
+    post :uploading, file: fixture_file_upload('files/sample.csv', 'text/csv')
+    file = CsvFile.last
+    get :results, fid: file.id
+    assert assigns(:file) == file
+    assert_equal file.dump_products.count, 3
+    assert_equal CsvFile.count, 1
+  end
+
+  test "importing" do
+    post :uploading, file: fixture_file_upload('files/sample.csv', 'text/csv')
+    file = CsvFile.last
+
+    assert_difference('Product.count', 3) do
+      post :importing, 'pid' => [1,2,3], fid: file.id  
+    end
+
+    assert_difference('Product.count', 2) do
+      post :importing, 'pid' => [1,3], fid: file.id  
+    end
+
+    assert_difference('Product.count', 1) do
+      post :importing, 'pid' => [2], fid: file.id  
+    end
+
+    assert_difference('Product.count', 0) do
+      post :importing, 'pid' => [], fid: file.id 
+      assert_redirected_to products_path
+    end
+
+  end
+
 end

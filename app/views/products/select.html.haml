@@ -1,0 +1,29 @@
+.span9
+  = bootstrap_flash
+  - model_class = Product
+  .page-header
+    %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+  = form_tag({action: :select}) do
+    %table.table.table-striped
+      %thead
+        %tr
+          %th(width=10)
+              = check_box_tag :checkall, 0, true, id: 'checkall'
+          %th= model_class.human_attribute_name(:sku)
+          %th= model_class.human_attribute_name(:name)
+          %th= model_class.human_attribute_name(:sale_price)
+          %th= model_class.human_attribute_name(:commission_amount)
+          %th= model_class.human_attribute_name(:retail_price)
+      %tbody
+        - @products.each do |product|
+          %tr
+            %td= check_box_tag 'pid[]', product[:id], true, id: "pid_#{product[:id]}"
+            %td= product.sku
+            %td= link_to product.name, product_path(product)
+            %td=m product.sale_price
+            %td=m product.commission_amount
+            %td=m product.retail_price
+
+  = link_to t('.new', :default => t("helpers.links.new")), new_product_path, :class => 'btn btn-primary'
+
+= render partial: "sider"

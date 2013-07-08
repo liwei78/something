@@ -7,8 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-20.times do 
-	Product.create(
-		name: Faker::Name.name, 
-		price: rand(100))
-end
+# 20.times do 
+# 	Product.create(
+# 		name: Faker::Name.name, 
+# 		price: rand(100))
+# end

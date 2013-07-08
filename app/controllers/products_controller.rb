@@ -112,12 +112,12 @@ class ProductsController < ApplicationController
   end
 
   def importing
-    @file = CsvFile.find(params[:fid])
+    file = CsvFile.find(params[:fid])
     pids = params[:pid]
-    
+
     n = 0
     products = []
-    CSV.foreach(File.join(Rails.root, 'public', 'csv', "#{@file.file_name}.csv")) do |row|
+    CSV.foreach(File.join(Rails.root, 'public', 'csv', "#{file.file_name}.csv")) do |row|
       if n == 0
         n += 1
         next
@@ -137,9 +137,6 @@ class ProductsController < ApplicationController
         retail_price: row[4].to_f,
         )
     end
-
-
-
 
     redirect_to products_path
 

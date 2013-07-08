@@ -15,7 +15,11 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', :platforms => :ruby
+  # 
+  # 2013-7-9 liwei
+  # apt-get install nodejs nodejs-dbg nodejs-dev
+  # 
+  # gem 'therubyracer', :platforms => :ruby
   # gem "less-rails"
 
   gem 'bootstrap-sass'

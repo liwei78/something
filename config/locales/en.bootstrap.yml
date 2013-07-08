@@ -6,6 +6,7 @@ en:
     actions: "Actions"
     links:
       back: "Back"
+      clone: "Clone"
       cancel: "Cancel"
       confirm: "Are you sure?"
       destroy: "Del"
