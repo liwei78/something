@@ -105,4 +105,11 @@ class ProductsControllerTest < ActionController::TestCase
 
   end
 
+  test "select" do
+    pids = [1,3]
+    post :select, pid: pids
+    assert_equal assigns(:products).count, 2
+    assert_equal assigns(:products).map {|pp| pp.id}, pids
+  end
+
 end

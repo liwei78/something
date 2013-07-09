@@ -10,7 +10,6 @@ It's a simple site.
     [x] upload csv template csv file
     [ ] download fail upload csv file
     [ ] download all products csv file
-[ ] Single Product clone
 [ ] Batch Products clone
 [ ] Batch Products attr edit form
 

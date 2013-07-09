@@ -1,29 +1,32 @@
-.span9
+.span12
   = bootstrap_flash
   - model_class = Product
   .page-header
     %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
-  = form_tag({action: :select}) do
+  = form_tag(multiple_update_products_path, method: :put, remote: true) do
     %table.table.table-striped
       %thead
         %tr
-          %th(width=10)
-              = check_box_tag :checkall, 0, true, id: 'checkall'
           %th= model_class.human_attribute_name(:sku)
           %th= model_class.human_attribute_name(:name)
+          %th= model_class.human_attribute_name(:permalink)
           %th= model_class.human_attribute_name(:sale_price)
           %th= model_class.human_attribute_name(:commission_amount)
           %th= model_class.human_attribute_name(:retail_price)
+          %th= model_class.human_attribute_name(:blocked)
       %tbody
         - @products.each do |product|
-          %tr
-            %td= check_box_tag 'pid[]', product[:id], true, id: "pid_#{product[:id]}"
-            %td= product.sku
-            %td= link_to product.name, product_path(product)
-            %td=m product.sale_price
-            %td=m product.commission_amount
-            %td=m product.retail_price
+          = fields_for "products[]", product do |f|
+            %tr
+              %td= f.text_field :sku, class: 'input-mini'
+              %td= f.text_field :name, class: 'input-mini'
+              %td= f.text_field :permalink, class: 'input-mini'
+              %td= f.text_field :sale_price, class: 'input-mini'
+              %td= f.text_field :commission_amount, class: 'input-mini'
+              %td= f.text_field :retail_price, class: 'input-mini'
+              %td= f.check_box :blocked
 
-  = link_to t('.new', :default => t("helpers.links.new")), new_product_path, :class => 'btn btn-primary'
+    = link_to t('.back', :default => t("helpers.links.back")), products_path, :class => 'btn'
+    = submit_tag "Update", :class => 'btn btn-primary', id: 'multiple_update_btn'
+    = submit_tag "Clone", :class => 'btn btn-primary', id: 'multiple_clone_btn'
 
-= render partial: "sider"

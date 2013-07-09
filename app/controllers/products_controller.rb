@@ -146,5 +146,20 @@ class ProductsController < ApplicationController
     send_file File.join(Rails.root, 'public', 'sample.csv')
   end
 
+  def select
+    @products = Product.find(params[:pid])
+  end
+
+  def multiple_update
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def multiple_clone
+    respond_to do |format|
+      format.js
+    end
+  end
 
 end
