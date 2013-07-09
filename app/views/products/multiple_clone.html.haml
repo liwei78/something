@@ -1,0 +1,31 @@
+.span12
+  = bootstrap_flash
+  - model_class = Product
+  .page-header
+    %h1= 'Multiple Clone'
+  = form_tag(multiple_duplicate_products_path, method: :post) do
+    %table.table.table-striped
+      %thead
+        %tr
+          %th= model_class.human_attribute_name(:sku)
+          %th= model_class.human_attribute_name(:name)
+          %th= model_class.human_attribute_name(:permalink)
+          %th= model_class.human_attribute_name(:sale_price)
+          %th= model_class.human_attribute_name(:commission_amount)
+          %th= model_class.human_attribute_name(:retail_price)
+          %th= model_class.human_attribute_name(:blocked)
+      %tbody
+        - @products.each do |product|
+          = fields_for "products[]", product do |f|
+            %tr
+              %td= f.text_field :sku
+              %td= f.text_field :name
+              %td= f.text_field :permalink, class: 'input-mini'
+              %td= f.text_field :sale_price, class: 'input-mini'
+              %td= f.text_field :commission_amount, class: 'input-mini'
+              %td= f.text_field :retail_price, class: 'input-mini'
+              %td= f.check_box :blocked
+
+    = link_to t('.back', :default => t("helpers.links.back")), products_path, :class => 'btn'
+    = submit_tag "Clone", :class => 'btn btn-primary', id: 'multiple_clone_btn'
+

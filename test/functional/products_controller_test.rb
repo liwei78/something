@@ -105,11 +105,40 @@ class ProductsControllerTest < ActionController::TestCase
 
   end
 
-  test "select" do
+  test "multiple_edit" do
     pids = [1,3]
-    post :select, pid: pids
+    post :multiple_edit, pid: pids
     assert_equal assigns(:products).count, 2
     assert_equal assigns(:products).map {|pp| pp.id}, pids
   end
+
+  test "multiple_clone" do
+    pids = [1,2,3]
+    post :multiple_edit, pid: pids
+    assert_equal assigns(:products).count, 3
+    assert_equal assigns(:products).map {|pp| pp.id}, pids
+  end
+
+  test "multiple_update" do
+    post :multiple_update, method: :put, 'products' => {'1' => {'name' => 'Product 01 (edit)'}, '2' => {'sku' => 'P02 (edit)'}}
+    product_1 = Product.find 1
+    assert_equal product_1.name, 'Product 01 (edit)'
+    product_2 = Product.find 2
+    assert_equal product_2.sku, 'P02 (edit)'
+  end
+
+  test "multiple_duplicate" do
+    assert_difference('Product.count', 2) do
+      post :multiple_duplicate, "products"=>{
+        "98"=>{"sku"=>"P503 (copy)", "name"=>"Prod 03 (copy)", "permalink"=>"", "sale_price"=>"9", "commission_amount"=>"2", "retail_price"=>"12", "blocked"=>"0"}, 
+        "99"=>{"sku"=>"P60199 (copy)", "name"=>"Prod 02 (copy)", "permalink"=>"haha", "sale_price"=>"89.99", "commission_amount"=>"4.99", "retail_price"=>"99.99", "blocked"=>"0"}}
+    end
+    assert_not_nil Product.find_by_name('Prod 03 (copy)')
+    assert_not_nil Product.find_by_sku('P60199 (copy)')
+  end
+
+  # TODO: validate error 
+
+
 
 end

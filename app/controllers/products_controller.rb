@@ -146,20 +146,34 @@ class ProductsController < ApplicationController
     send_file File.join(Rails.root, 'public', 'sample.csv')
   end
 
-  def select
+  def multiple_edit
     @products = Product.find(params[:pid])
   end
 
+  def multiple_clone
+    @products = Product.find(params[:pid])
+    @products.each(&:copy_me)
+  end
+
   def multiple_update
-    respond_to do |format|
-      format.js
+    @products = Product.update(params[:products].keys, params[:products].values).reject {|pp| pp.errors.empty?}
+    if @products.empty?
+      flash[:flash] = "Mutiple Update Success"
+      redirect_to products_path
+    else
+      render action: 'multiple_edit'
     end
   end
 
-  def multiple_clone
-    respond_to do |format|
-      format.js
+  def multiple_duplicate
+    @products = Product.create(params[:products].values).reject {|pp| pp.errors.empty?}
+    if @products.empty?
+      flash[:flash] = "Mutiple Clone Success"
+      redirect_to products_path
+    else
+      render action: 'multiple_clone'
     end
   end
+
 
 end

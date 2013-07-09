@@ -12,3 +12,11 @@ jQuery ->
     else
       $("input:checkbox[name='pid[]']").each ->
         $(this).is ':checked', false
+
+  $('#clone_btn').click =>
+    $('#multiple_form').attr('action', '/products/multiple_clone')
+    $('#multiple_form').submit()
+  $('#edit_btn').click =>
+    $('#multiple_form').attr('action', '/products/multiple_edit')
+    $('#multiple_form').submit()
+

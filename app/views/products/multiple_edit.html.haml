@@ -2,8 +2,8 @@
   = bootstrap_flash
   - model_class = Product
   .page-header
-    %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
-  = form_tag(multiple_update_products_path, method: :put, remote: true) do
+    %h1= 'Multiple Edit'
+  = form_tag(multiple_update_products_path, method: :put) do
     %table.table.table-striped
       %thead
         %tr
@@ -18,8 +18,8 @@
         - @products.each do |product|
           = fields_for "products[]", product do |f|
             %tr
-              %td= f.text_field :sku, class: 'input-mini'
-              %td= f.text_field :name, class: 'input-mini'
+              %td= f.text_field :sku
+              %td= f.text_field :name
               %td= f.text_field :permalink, class: 'input-mini'
               %td= f.text_field :sale_price, class: 'input-mini'
               %td= f.text_field :commission_amount, class: 'input-mini'
@@ -28,5 +28,4 @@
 
     = link_to t('.back', :default => t("helpers.links.back")), products_path, :class => 'btn'
     = submit_tag "Update", :class => 'btn btn-primary', id: 'multiple_update_btn'
-    = submit_tag "Clone", :class => 'btn btn-primary', id: 'multiple_clone_btn'
 
