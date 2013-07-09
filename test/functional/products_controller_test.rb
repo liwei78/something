@@ -137,8 +137,52 @@ class ProductsControllerTest < ActionController::TestCase
     assert_not_nil Product.find_by_sku('P60199 (copy)')
   end
 
-  # TODO: validate error 
+  # with validates error 
 
+  test "multiple_update with errors" do
+    post :multiple_update, method: :put, 'products' => {'1' => {'name' => ''}, '2' => {'sku' => ''}}
+    assert_equal assigns(:products).count, 2
+    assigns(:products).each do |pp|
+      assert pp.errors.any?
+    end
 
+    post :multiple_update, method: :put, 'products' => {'1' => {'name' => ''}}
+    assigns(:products).each do |pp|
+      assert pp.errors.keys.include?(:name)
+      assert_equal pp.errors[:name], ["can't be blank"]
+    end
+
+    post :multiple_update, method: :put, 'products' => {'2' => {'sku' => ''}}
+    assigns(:products).each do |pp|
+      assert pp.errors.keys.include?(:sku)
+      assert_equal pp.errors[:sku], ["can't be blank"]
+    end
+
+    assert_template 'multiple_edit'
+  end
+
+  test "multiple_duplicate with errors" do
+    post :multiple_duplicate, 'products' => {'1' => {'name' => ''}, '2' => {'sku' => ''}}
+    assert_equal assigns(:products).count, 2
+    assigns(:products).each do |pp|
+      assert pp.errors.any?
+    end
+
+    post :multiple_duplicate, 'products' => {'1' => {'name' => ''}}
+    assigns(:products).each do |pp|
+      assert pp.errors.keys.include?(:name)
+      assert_equal pp.errors[:name], ["can't be blank"]
+      assert_equal pp.id, 1
+    end
+
+    post :multiple_duplicate, 'products' => {'2' => {'sku' => ''}}
+    assigns(:products).each do |pp|
+      assert pp.errors.keys.include?(:sku)
+      assert_equal pp.errors[:sku], ["can't be blank"]
+      assert_equal pp.id, 1
+    end
+
+    assert_template 'multiple_clone'
+  end
 
 end

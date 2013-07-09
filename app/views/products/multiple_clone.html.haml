@@ -18,8 +18,14 @@
         - @products.each do |product|
           = fields_for "products[]", product do |f|
             %tr
-              %td= f.text_field :sku
-              %td= f.text_field :name
+              %td
+                = f.text_field :sku
+                - if product.errors.any? && !product.errors[:sku].blank?
+                  %span.help-inline= link_to "?", '#', 'data-toggle' => 'tooltip', title: "Sku: " + product.errors[:sku].join(', ')
+              %td
+                = f.text_field :name
+                - if product.errors.any? && !product.errors[:name].blank?
+                  %span.help-inline= link_to "?", '#', 'data-toggle' => 'tooltip', title: "Name: " + product.errors[:name].join(', ')
               %td= f.text_field :permalink, class: 'input-mini'
               %td= f.text_field :sale_price, class: 'input-mini'
               %td= f.text_field :commission_amount, class: 'input-mini'

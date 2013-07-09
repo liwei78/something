@@ -158,9 +158,10 @@ class ProductsController < ApplicationController
   def multiple_update
     @products = Product.update(params[:products].keys, params[:products].values).reject {|pp| pp.errors.empty?}
     if @products.empty?
-      flash[:flash] = "Mutiple Update Success"
+      flash[:success] = "Mutiple Update Success"
       redirect_to products_path
     else
+      flash[:error] = "Error!! Oooops!"
       render action: 'multiple_edit'
     end
   end
@@ -168,9 +169,15 @@ class ProductsController < ApplicationController
   def multiple_duplicate
     @products = Product.create(params[:products].values).reject {|pp| pp.errors.empty?}
     if @products.empty?
-      flash[:flash] = "Mutiple Clone Success"
+      flash[:success] = "Mutiple Clone Success"
       redirect_to products_path
     else
+      n = 1
+      @products.each do |pp|
+        pp.id = n
+        n += 1
+      end
+      flash[:error] = "Error!! Oooops!"
       render action: 'multiple_clone'
     end
   end

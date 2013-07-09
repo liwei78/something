@@ -17,6 +17,7 @@
 //= require bootstrap-tooltip
 //= require bootstrap-popover
 //= require bootstrap-affix
+//= require bootstrap-alert
 //= require_tree .
 
 
