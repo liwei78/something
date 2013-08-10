@@ -19,8 +19,8 @@ group :assets do
   # 2013-7-9 liwei
   # apt-get install nodejs nodejs-dbg nodejs-dev
   # 
-  # gem 'therubyracer', :platforms => :ruby
-  # gem "less-rails"
+  gem 'therubyracer', :platforms => :ruby
+  gem "less-rails"
 
   gem 'bootstrap-sass'
   gem 'uglifier', '>= 1.0.3'
